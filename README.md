@@ -1,9 +1,9 @@
-SendInformation
+join MOTD next
 ---------
 
 在玩家进入/退出服务器时，发送更加多样的信息
 
-### 配置文件:send_information.json
+### 配置文件:join_motd_next.json
 
 ```python
 {
