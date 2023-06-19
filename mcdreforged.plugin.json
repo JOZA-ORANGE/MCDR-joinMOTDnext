@@ -1,0 +1,11 @@
+{
+  "id": "join_motd_next",
+  "version": "0.1.0",
+  "name": "join MOTD next",
+  "description": {
+    "en_us": "Send more diverse information to players when they join the game",
+    "zh_cn": "在玩家加入游戏时向其发送更加多样的信息"
+  },
+  "author": "JOZA_ORANGE",
+  "link": "https://github.com/JOZA-ORANGE/MCDR-joinMOTDnext"
+}
