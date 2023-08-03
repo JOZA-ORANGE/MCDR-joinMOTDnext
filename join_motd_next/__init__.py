@@ -1,11 +1,11 @@
 import os
 import random
 import re
-
+from typing import List, Dict
 from mcdreforged.api.all import *
 from join_motd_next.default_config import default_config
-from daycount_nbt import getday
 
+__mcdr_server: PluginServerInterface
 CONFIG_FILE = os.path.join('config', 'join_motd_next.json')
 
 
@@ -16,6 +16,11 @@ def send_message(server: PluginServerInterface, messages: RTextList, scope: str,
         server.say(messages)
 
 
+def getDay() -> str:
+    daycount_nbt = __mcdr_server.get_plugin_instance('daycount_nbt')
+    return daycount_nbt.getday()
+
+
 def format_message(message: str, player: str) -> str:
     if message is not None:
         placeholders = re.findall(r'\{(\w+)}', message)
@@ -23,11 +28,11 @@ def format_message(message: str, player: str) -> str:
             if placeholder in random_text:
                 value = random.choice(random_text[placeholder])
                 message = message.replace("{" + placeholder + "}", value)
-        message = message.format(player=player, date=str(getday()))
+        message = message.format(player=player, date=str(getDay()))
     return message
 
 
-def msg_to_rtextlist(row: list[dict], player: str) -> RTextList:
+def msg_to_rtextlist(row: List[Dict], player: str) -> RTextList:
     rtextlist = RTextList()
 
     for unit in row:
@@ -54,7 +59,7 @@ def msg_to_rtextlist(row: list[dict], player: str) -> RTextList:
     return rtextlist
 
 
-def create_and_send_message(server: PluginServerInterface, message_list: list[list[dict]], scope: str, player: str):
+def create_and_send_message(server: PluginServerInterface, message_list: List[List[Dict]], scope: str, player: str):
     for row in message_list:
         rtextlist = msg_to_rtextlist(row, player)
         send_message(server, rtextlist, scope, player)
@@ -139,7 +144,8 @@ def print_left(source: PlayerCommandSource):
 
 # 插件载入
 def on_load(server: PluginServerInterface, old_module):
-    global config, join_info, left_info, random_text
+    global config, join_info, left_info, random_text, __mcdr_server
+    __mcdr_server = server
     # 读取配置文件
     config = server.load_config_simple(file_name=CONFIG_FILE, default_config=default_config, in_data_folder=False)
     join_info = extract_tag_info(config["player_join"]["message"])

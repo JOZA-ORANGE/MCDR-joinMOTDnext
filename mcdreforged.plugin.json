@@ -1,6 +1,6 @@
 {
   "id": "join_motd_next",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "name": "join MOTD next",
   "description": {
     "en_us": "Send more diverse information to players when they join the game",
