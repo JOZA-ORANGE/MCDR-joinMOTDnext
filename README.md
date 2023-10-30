@@ -105,7 +105,6 @@ join MOTD next
     "<text>§5{player}§r加入了游戏</text>",
     "<url(h=打开百度)(v=https://www.baidu.com)>打开链接</url>",
     "<copy(h=种子)(v=20030119)>点我复制种子</copy>",
-    "<command(h=获取op)(v=!!op)>点我执行命令</command>",
     "<fill(h=填充你的名字)(v={player})>获取名字</fill>",
     "<text>§3获取名字：§r</text><fill(h=填充你的名字)(v={player})>点我</fill>",
     "<fill(h=填充你的名字)(v={player})>点我获取§1名字§r</fill>"
